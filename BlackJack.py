@@ -33,7 +33,7 @@ class BlackJack():
         if loso not in previous_value:
                 previous_value.append(loso)
 
-    def losuj_karte(self, kolejne_karty, nazwa_gracza, karta1, karta2):
+    def losuj_karte(self, kolejne_karty, karta1, karta2):
 
         while len(previous_value) < kolejne_karty:
             wrong(self)
@@ -52,19 +52,17 @@ class BlackJack():
     # losuj_karte(6, 'erne', 4, 5)
 
 
-#TUTAJ JEST POTRZEBNE PRORAMOWANIE OBIEKTOWE ZEBY DLA KAZDEGO GRACZA PRZYPISYWAC WARTOSCI
-
-
 
 gracz1 = BlackJack()
 gracz1.gracz('theto', 1200)
-gracz1.losuj_karte(2, 'er', 0, 1)
+gracz1.losuj_karte(2,  0, 1)
 
 
 gracz2 = BlackJack()
 gracz2.gracz('erlo', 1600)
-gracz2.losuj_karte(4, 'er', 2, 3)
+gracz2.losuj_karte(4, 2, 3)
 
 gracz3 = BlackJack()
 gracz3.gracz('rter', 2600)
-gracz3.losuj_karte(6, 'er', 4, 5)
+gracz3.losuj_karte(6,  4, 5)
+
