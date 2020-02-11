@@ -10,6 +10,8 @@ previous_value = []
 print ('Witaj w grze Black Jack ! Postepuj wedlug podpowiedzi i baw sie dobrze, oby los ci sprzyjal !!')
 gra = input('Podaj ilosc graczy(liczba): ')
 
+# for i in range(gra):
+
 class BlackJack():
     global karty
     karty = {'dwojka_pik': 2, 'dwojka_kier': 2, 'dwojka_trefl': 2, 'dwojka_karo': 2,
@@ -28,33 +30,35 @@ class BlackJack():
     global grac
     grac = []
 
+
+
     insta = []
-    def __init__(self, nazwa_gracza, kwota, karty_gracza):
+    def __init__(self):
         self.__class__.insta.append(weakref.proxy(self))
         # __metaclass__ = IterRegistry
-        self.nazwa_gracza = nazwa_gracza
-        self.kwota = kwota
+        self.nazwa_gracza = input('podaj nazwe gracza: ')
+        self.kwota = input('podaj kwote: ')
         self.karty_gracza = []
-        self.instancja = []
+        # self.instancja = []
         print('Oto nowy gracz: ' + str(self.nazwa_gracza) + str(' kwota wejscia: ' + str(self.kwota)))
         grac.append(self.nazwa_gracza)
 
 
-    @classmethod
-    def from_input(cls):
-        return cls(
-            raw_input('nazwa_gracza: '),
-            int(raw_input('kwota: ')),
-            'karty_gracza'
-        )
+    # @classmethod
+    # def from_input(cls):
+    #     return cls(
+    #         raw_input('nazwa_gracza: '),
+    #         int(raw_input('kwota: ')),
+    #         'karty_gracza'
+    #     )
 
-    # pprint(vars())
+
     global wrong
     def wrong(self):
         dic_list = list(karty)
         loso = random.choice(dic_list)
         if loso not in previous_value:
-                previous_value.append(loso)
+            previous_value.append(loso)
 
     def losuj_karte(self, kolejne_karty, karta1, karta2):
         while len(previous_value) < kolejne_karty:
@@ -65,11 +69,9 @@ class BlackJack():
         print('karty  gracza: ' + str(self.nazwa_gracza) + str(wylosowane_karty))
 
 
-    print (previous_value)
+# print (previous_value)
 
 
-for i in range(gra):
-    BlackJack.from_input()
 # gracz1 = BlackJack('theto', 1200, [])
 # # gracz1.gracz('theto', 1200, [])
 # gracz1.losuj_karte(2, 0, 1)
@@ -85,15 +87,13 @@ for i in range(gra):
 class Post_Nowa(BlackJack):
 
     def druk(self):
-        ilosc_graczy = gra
-        for l in range(ilosc_graczy):
+        for l in range(gra):
             wybierz_gracza = (raw_input('Wybierz gracza ktoremu dac karte: '))
             drugie_rozdanie = raw_input('kolejna karta ? tak/nie')
             if drugie_rozdanie == 'tak':
                 wrong(self)
-
+                print(previous_value)
                 for i in BlackJack.insta:
-
                     if wybierz_gracza == i.nazwa_gracza:
                         print ('tak')
                         #self.karty_gracza.append(previous_value[-1])
@@ -172,10 +172,10 @@ class Post_Nowa(BlackJack):
 # gracz1.drugie_losowanie()
 print(previous_value)
 
-post_nowy = Post_Nowa('krupier', 2, []).druk()
+post_nowy = Post_Nowa().druk()
 
 
-# pprint(vars(from_input()))
+pprint(vars(BlackJack))
 # pprint(vars(gracz2))
 # pprint(vars(gracz1))
 
