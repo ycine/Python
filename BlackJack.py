@@ -30,8 +30,6 @@ class BlackJack():
     global grac
     grac = []
 
-
-
     insta = []
     def __init__(self, nazwa_gracza, kwota, karty_gracza):
         self.__class__.insta.append(weakref.proxy(self))
@@ -86,12 +84,16 @@ class BlackJack():
 # # gracz3.gracz('rter', 2600, [])
 # gracz3.losuj_karte(6, 4, 5)
 
+
+
 users = {}
 for _ in range(gra):
     user = BlackJack.from_input()  # from user input
     users[user.nazwa_gracza] = user
 
 for i in users:
+    user.wrong()
+    user.wrong()
     print (i)
 
 pprint(users)
