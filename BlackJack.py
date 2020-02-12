@@ -54,6 +54,7 @@ class BlackJack():
             'karty_gracza'
         )
 
+
     # global wrong
     def wrong(self):
         dic_list = list(karty)
@@ -94,6 +95,7 @@ for i in users:
     print (i)
 
 pprint(users)
+
 
 
 class Post_Nowa(BlackJack):
@@ -191,7 +193,7 @@ class Post_Nowa(BlackJack):
 #     pprint(vars(i))
 # for i in ob:
 #     print (i)
-Post_Nowa(users).druk()
+Post_Nowa('krupier', 23, []).druk()
 
 # pprint(vars(BlackJack))
 print(previous_value)
