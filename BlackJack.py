@@ -58,13 +58,31 @@ class BlackJack():
         if loso not in previous_value:
             previous_value.append(loso)
 
-    def losuj_karte(self, kolejne_karty, karta1, karta2):
-        while len(previous_value) < kolejne_karty:
-            wrong(self)
-        wylosowane_karty = previous_value[karta1], previous_value[karta2]
-        wylosowane_karty_list = list(wylosowane_karty)
-        self.karty_gracza.append(wylosowane_karty_list)
-        print('karty  gracza: ' + str(self.nazwa_gracza) + str(wylosowane_karty))
+    # def losuj_karte(self, kolejne_karty, karta1, karta2):
+    #     while len(previous_value) < kolejne_karty:
+    #         wrong(self)
+    #     wylosowane_karty = previous_value[karta1], previous_value[karta2]
+    #     wylosowane_karty_list = list(wylosowane_karty)
+    #     self.karty_gracza.append(wylosowane_karty_list)
+    #     print('karty  gracza: ' + str(self.nazwa_gracza) + str(wylosowane_karty))
+
+
+    # TUTAJ TRZEBA DOPISAC LOGIKE, ZEBY DLA KOLEJNEGO GRACZA DAWAL KOLEJNE KARTY
+    def losuj_karte(self):
+        previous_value2 = []
+        ite = iter(previous_value)
+        nex = next(ite)
+
+        for i in users.values():
+
+
+            # c = [l for l in previous_value if l in range(2)]
+            previous_value2.append(nex)
+            print('z losuj karte' + str(previous_value2))
+
+            i.karty_gracza.append(previous_value)
+            #to wybiera dwie
+
 
 # print (previous_value)
 
@@ -81,7 +99,7 @@ class BlackJack():
 # # gracz3.gracz('rter', 2600, [])
 # gracz3.losuj_karte(6, 4, 5)
 
-
+global users
 users = {}
 for _ in range(gra):
     user = BlackJack.from_input()  # from user input
@@ -90,15 +108,14 @@ for _ in range(gra):
 
 for i in users:
     user.wrong()
-    user.wrong()
-    print (i)
+    # user.wrong()
+
+user.losuj_karte()
+
+#print do testow
 for i in users.values():
     pprint(vars(i))
-
-# pprint(vars(user))
-
-# pprint(users)
-
+    # print (i.karty_gracza)
 
 
 class Post_Nowa(BlackJack):
