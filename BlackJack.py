@@ -49,9 +49,7 @@ class BlackJack():
         return cls(
             str(raw_input('nazwa_gracza: ')),
             int(raw_input('kwota: ')),
-            'karty_gracza'
-        )
-
+            'karty_gracza')
 
     # global wrong
     def wrong(self):
@@ -67,7 +65,6 @@ class BlackJack():
         wylosowane_karty_list = list(wylosowane_karty)
         self.karty_gracza.append(wylosowane_karty_list)
         print('karty  gracza: ' + str(self.nazwa_gracza) + str(wylosowane_karty))
-
 
 # print (previous_value)
 
@@ -85,18 +82,22 @@ class BlackJack():
 # gracz3.losuj_karte(6, 4, 5)
 
 
-
 users = {}
 for _ in range(gra):
     user = BlackJack.from_input()  # from user input
     users[user.nazwa_gracza] = user
 
+
 for i in users:
     user.wrong()
     user.wrong()
     print (i)
+for i in users.values():
+    pprint(vars(i))
 
-pprint(users)
+# pprint(vars(user))
+
+# pprint(users)
 
 
 
