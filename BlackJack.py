@@ -58,29 +58,27 @@ class BlackJack():
         if loso not in previous_value:
             previous_value.append(loso)
 
-    # def losuj_karte(self, kolejne_karty, karta1, karta2):
-    #     while len(previous_value) < kolejne_karty:
-    #         wrong(self)
-    #     wylosowane_karty = previous_value[karta1], previous_value[karta2]
-    #     wylosowane_karty_list = list(wylosowane_karty)
-    #     self.karty_gracza.append(wylosowane_karty_list)
-    #     print('karty  gracza: ' + str(self.nazwa_gracza) + str(wylosowane_karty))
-
 
     # TUTAJ TRZEBA DOPISAC LOGIKE, ZEBY DLA KOLEJNEGO GRACZA DAWAL KOLEJNE KARTY
     #ta funkcja tutaj powinna
     def losuj_karte(self):
-        previous_value2 = []
-        # ite = iter(previous_value)
-        # nex = next(ite)
         print (previous_value)
-        # i.karty_gracza.append(previous_value)
-        # while
         for i in users.values():
             BlackJack.wrong(self)
             BlackJack.wrong(self)
             i.karty_gracza.extend(previous_value[-2:])
-            print (previous_value)
+            # print (previous_value)
+
+    #FUNKCJA MA LICZYC WYNIK Z KART. I POKAZYWAC ZWYCIEZCE.. ?
+    def licz_wynik(self):
+        licz_kar = []
+        for i in users.values():
+            kar = i.karty_gracza
+            # print (kar)
+            for l in kar:
+                # print (l)
+                if l in karty.keys():
+                    print ('tak')
 
 
 
@@ -108,11 +106,10 @@ for _ in range(gra):
     # user.wrong()
 
 user.losuj_karte()
-
+user.licz_wynik()
 #print do testow
 for i in users.values():
     pprint(vars(i))
-    # print (i.karty_gracza)
 
 
 class Post_Nowa(BlackJack):
@@ -132,7 +129,6 @@ class Post_Nowa(BlackJack):
                     else:
                         print('nie')
 
-
 # gracz1 = BlackJack('theto', 1200, [])
 # # gracz1.gracz('theto', 1200, [])
 # gracz1.losuj_karte(2, 0, 1)
@@ -145,23 +141,15 @@ class Post_Nowa(BlackJack):
 # # gracz3.gracz('rter', 2600, [])
 # gracz3.losuj_karte(6, 4, 5)
 
-
-# gracz1.drugie_losowanie()
-
-
-
-
-# obiekty = [BlackJack()for i in range(gra)]
-# for i in obiekty:
-#     ob.append(i)
-#     pprint(vars(i))
-# for i in ob:
-#     print (i)
 Post_Nowa('krupier', 23, []).druk()
 
 # pprint(vars(BlackJack))
-print(previous_value)
+# print(previous_value)
 
 
+# print (karty.items())
 
-
+# print(users.values())
+# for i in users.values():
+#     for i in i.karty_gracza:
+#         print (i.ke)
