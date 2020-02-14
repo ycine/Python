@@ -68,23 +68,20 @@ class BlackJack():
 
 
     # TUTAJ TRZEBA DOPISAC LOGIKE, ZEBY DLA KOLEJNEGO GRACZA DAWAL KOLEJNE KARTY
+    #ta funkcja tutaj powinna
     def losuj_karte(self):
         previous_value2 = []
-        ite = iter(previous_value)
-        nex = next(ite)
-
+        # ite = iter(previous_value)
+        # nex = next(ite)
+        print (previous_value)
+        # i.karty_gracza.append(previous_value)
+        # while
         for i in users.values():
+            BlackJack.wrong(self)
+            BlackJack.wrong(self)
+            i.karty_gracza.extend(previous_value[-2:])
+            print (previous_value)
 
-
-            # c = [l for l in previous_value if l in range(2)]
-            previous_value2.append(nex)
-            print('z losuj karte' + str(previous_value2))
-
-            i.karty_gracza.append(previous_value)
-            #to wybiera dwie
-
-
-# print (previous_value)
 
 
 # gracz1 = BlackJack('theto', 1200, [])
@@ -106,8 +103,8 @@ for _ in range(gra):
     users[user.nazwa_gracza] = user
 
 
-for i in users:
-    user.wrong()
+# for i in users:
+    # user.wrong()
     # user.wrong()
 
 user.losuj_karte()
@@ -135,59 +132,6 @@ class Post_Nowa(BlackJack):
                     else:
                         print('nie')
 
-    # def drugie_losowanie(self):
-    #
-    #
-    #     ilosc_graczy = len(grac)
-    #     # for i in range(ilosc_graczy):
-    #     wybierz_gracza = (raw_input('Wybierz gracza ktoremu dac karte: '))
-    #     drugie_rozdanie = raw_input('kolejna karta ? tak/nie')
-    #
-    #
-    #     for insta in BlackJack.nazwa_gracza:
-    #         if wybierz_gracza == insta.nazwa_gracza:
-    #             print('tak')
-    #         else:
-    #             print('nie')
-    #
-    #
-    #     # self.instancja.append(self)
-    #     # self.instancja = self.instancja
-    #     #
-    #     # wybierzrz = {}
-    #     # wybierzrz[wybierz_gracza] = BlackJack
-    #     # print (wybierzrz)
-    #
-    #     # wybierz_gracza2 = raw_input('Wybierz gracza ktoremu dac karte: ')
-    #     # print (wybierzrz[wybierz_gracza2].nazwa_gracza)
-    #
-    #     #TO POKAZE WSZYSTKIE ATRYBUTY DLA KAZDEGO OBIEKTU
-    #     # for attr, value in gracz2.__dict__.iteritems():
-    #     #     print(attr, value)
-    #     # def wybierz(self):
-    #     #     self.karty_gracza.append(wybierz_gracza)
-    #
-    #
-    #     if wybierz_gracza in self.instancja:
-    #
-    #
-    #
-    #         print('tak')
-    #     else:
-    #         print ('nie')
-    #
-    #     # for i in self.instancja:
-    #     #     if hasattr(self.instancja, wybierz_gracza):
-    #     #         self.karty_gracza.append(previous_value[-1])
-    #         if drugie_rozdanie == 'tak':
-    #             wrong(self)
-    #             for i in self.instancja:
-    #                 print (i)
-    #                 # if hasattr(self.instancja, wybierz_gracza):
-    #                 #     self.karty_gracza.append(previous_value[-1])
-    #                 # self.karty_gracza.append(previous_value[-1])
-    #             else:
-    #                 pass
 
 # gracz1 = BlackJack('theto', 1200, [])
 # # gracz1.gracz('theto', 1200, [])
