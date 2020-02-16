@@ -74,13 +74,12 @@ class BlackJack():
         licz_kar = []
         for i in users.values():
             kar = i.karty_gracza
-            # print (kar)
-            for l in kar:
-                # print (l)
-                if l in karty.keys():
-                    print ('tak')
-
-
+            print (kar)
+            for kazdakartagracza in kar:
+                # print (kazdakartagracza)
+                # if kazdakartagracza in karty:
+                print (karty[kazdakartagracza])
+                # print (sum(kazdakartagracza))
 
 # gracz1 = BlackJack('theto', 1200, [])
 # # gracz1.gracz('theto', 1200, [])
@@ -142,7 +141,7 @@ class Post_Nowa(BlackJack):
 # gracz3.losuj_karte(6, 4, 5)
 
 Post_Nowa('krupier', 23, []).druk()
-
+user.licz_wynik()
 # pprint(vars(BlackJack))
 # print(previous_value)
 
