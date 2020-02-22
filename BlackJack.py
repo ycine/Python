@@ -33,13 +33,10 @@ class BlackJack():
     insta = []
     def __init__(self, nazwa_gracza, kwota, karty_gracza):
         self.__class__.insta.append(weakref.proxy(self))
-        # __metaclass__ = IterRegistry
-        # self.nazwa_gracza = input('podaj nazwe gracza: ')
-        # self.kwota = input('podaj kwote: ')
         self.nazwa_gracza = nazwa_gracza
         self.kwota = kwota
         self.karty_gracza = []
-        # self.instancja = []
+        self.suma = []
         print('Oto nowy gracz: ' + str(self.nazwa_gracza) + str(' kwota wejscia: ' + str(self.kwota)))
         grac.append(self.nazwa_gracza)
 
@@ -75,11 +72,31 @@ class BlackJack():
         for i in users.values():
             kar = i.karty_gracza
             print (kar)
+
+            kazdakartawartosc = []
             for kazdakartagracza in kar:
-                # print (kazdakartagracza)
-                # if kazdakartagracza in karty:
-                print (karty[kazdakartagracza])
-                # print (sum(kazdakartagracza))
+                if kazdakartagracza == 'As_kier' or kazdakartagracza == 'As_karo' or kazdakartagracza == 'As_trefl' or kazdakartagracza == 'As_pik':
+                    asy = int(raw_input('Masz Asa! o jaka wartosc chcesz podniesc wynik? 1/10 ?'))
+                    if asy == 1:
+                        kazdakartawartosc.append(int(1))
+                    else:
+                        kazdakartawartosc.append(int(10))
+
+                # print
+                else:
+                    kazdakartawartosc.append(karty[kazdakartagracza])
+                print (kazdakartawartosc)
+                i.suma.append(sum(kazdakartawartosc))
+            print (sum(kazdakartawartosc))
+
+    def wygrany(self):
+        for i in users.values():
+
+            su = i.suma
+
+            print (str(i.nazwa_gracza) + str(' twoj wynik: ' + str(max(su))))
+
+
 
 # gracz1 = BlackJack('theto', 1200, [])
 # # gracz1.gracz('theto', 1200, [])
@@ -142,6 +159,7 @@ class Post_Nowa(BlackJack):
 
 Post_Nowa('krupier', 23, []).druk()
 user.licz_wynik()
+user.wygrany()
 # pprint(vars(BlackJack))
 # print(previous_value)
 
