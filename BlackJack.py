@@ -1,11 +1,9 @@
 import random
 import weakref
 from pprint import pprint
+from operator import attrgetter
 previous_value = []
 
-# class IterRegistry(type):
-#     def __iter__(cls):
-#         return iter(cls.nazwa_gracza)
 
 print ('Witaj w grze Black Jack ! Postepuj wedlug podpowiedzi i baw sie dobrze, oby los ci sprzyjal !!')
 gra = int(input('Podaj ilosc graczy(liczba): '))
@@ -91,24 +89,19 @@ class BlackJack():
 
     def wygrany(self):
         for i in users.values():
-
             su = i.suma
+            suli = []
+            su2 = max(su)
+            suli.append(su2)
+            for l in suli:
+                print (l)
+            print (str('oto maks: ') + str(max(suli)))
 
             print (str(i.nazwa_gracza) + str(' twoj wynik: ' + str(max(su))))
+            
 
+        # print (max(users.values(), key=attrgetter('suma')))
 
-
-# gracz1 = BlackJack('theto', 1200, [])
-# # gracz1.gracz('theto', 1200, [])
-# gracz1.losuj_karte(2, 0, 1)
-#
-# gracz2 = BlackJack('erlo', 1600, [])
-# # gracz2.gracz('erlo', 1600, [])
-# gracz2.losuj_karte(4, 2, 3)
-#
-# gracz3 = BlackJack('rter', 2600, [])
-# # gracz3.gracz('rter', 2600, [])
-# gracz3.losuj_karte(6, 4, 5)
 
 global users
 users = {}
@@ -116,10 +109,6 @@ for _ in range(gra):
     user = BlackJack.from_input()  # from user input
     users[user.nazwa_gracza] = user
 
-
-# for i in users:
-    # user.wrong()
-    # user.wrong()
 
 user.losuj_karte()
 user.licz_wynik()
@@ -145,28 +134,8 @@ class Post_Nowa(BlackJack):
                     else:
                         print('nie')
 
-# gracz1 = BlackJack('theto', 1200, [])
-# # gracz1.gracz('theto', 1200, [])
-# gracz1.losuj_karte(2, 0, 1)
-#
-# gracz2 = BlackJack('erlo', 1600, [])
-# # gracz2.gracz('erlo', 1600, [])
-# gracz2.losuj_karte(4, 2, 3)
-#
-# gracz3 = BlackJack('rter', 2600, [])
-# # gracz3.gracz('rter', 2600, [])
-# gracz3.losuj_karte(6, 4, 5)
+
 
 Post_Nowa('krupier', 23, []).druk()
 user.licz_wynik()
 user.wygrany()
-# pprint(vars(BlackJack))
-# print(previous_value)
-
-
-# print (karty.items())
-
-# print(users.values())
-# for i in users.values():
-#     for i in i.karty_gracza:
-#         print (i.ke)
