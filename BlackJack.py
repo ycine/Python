@@ -5,7 +5,7 @@ from operator import attrgetter
 previous_value = []
 
 
-print ('Witaj w grze Black Jack ! Postepuj wedlug podpowiedzi i baw sie dobrze, oby los ci sprzyjal !!')
+print('Witaj w grze Black Jack ! Postepuj wedlug podpowiedzi i baw sie dobrze, oby los ci sprzyjal !!')
 gra = int(input('Podaj ilosc graczy(liczba): '))
 
 # for i in range(gra):
@@ -42,8 +42,8 @@ class BlackJack():
     @classmethod
     def from_input(cls):
         return cls(
-            str(raw_input('nazwa_gracza: ')),
-            int(raw_input('kwota: ')),
+            str(input('nazwa_gracza: ')),
+            int(input('kwota: ')),
             'karty_gracza')
 
     # global wrong
@@ -74,7 +74,7 @@ class BlackJack():
             kazdakartawartosc = []
             for kazdakartagracza in kar:
                 if kazdakartagracza == 'As_kier' or kazdakartagracza == 'As_karo' or kazdakartagracza == 'As_trefl' or kazdakartagracza == 'As_pik':
-                    asy = int(raw_input('Masz Asa! o jaka wartosc chcesz podniesc wynik? 1/10 ?'))
+                    asy = int(input('Masz Asa! o jaka wartosc chcesz podniesc wynik? 1/10 ?'))
                     if asy == 1:
                         kazdakartawartosc.append(int(1))
                     else:
@@ -101,28 +101,10 @@ class BlackJack():
             
 
         # print (max(users.values(), key=attrgetter('suma')))
-
-
-global users
-users = {}
-for _ in range(gra):
-    user = BlackJack.from_input()  # from user input
-    users[user.nazwa_gracza] = user
-
-
-user.losuj_karte()
-user.licz_wynik()
-#print do testow
-for i in users.values():
-    pprint(vars(i))
-
-
-class Post_Nowa(BlackJack):
-
     def druk(self):
         for l in range(gra):
-            wybierz_gracza = (raw_input('Wybierz gracza ktoremu dac karte: '))
-            drugie_rozdanie = raw_input('kolejna karta ? tak/nie')
+            wybierz_gracza = (input('Wybierz gracza ktoremu dac karte: '))
+            drugie_rozdanie = input('kolejna karta ? tak/nie')
             if drugie_rozdanie == 'tak':
                 BlackJack.wrong(self)
                 print(previous_value)
@@ -134,8 +116,39 @@ class Post_Nowa(BlackJack):
                     else:
                         print('nie')
 
+global users
+users = {}
+for _ in range(gra):
+    user = BlackJack.from_input()  # from user input
+    users[user.nazwa_gracza] = user
 
 
-Post_Nowa('krupier', 23, []).druk()
+# user.losuj_karte()
+# user.licz_wynik()
+#print do testow
+for i in users.values():
+    pprint(vars(i))
+#CZY TU MUSI BYC KLASA ?
+# class Post_Nowa(BlackJack):
+#     def druk(self):
+#         for l in range(gra):
+#             wybierz_gracza = (input('Wybierz gracza ktoremu dac karte: '))
+#             drugie_rozdanie = input('kolejna karta ? tak/nie')
+#             if drugie_rozdanie == 'tak':
+#                 BlackJack.wrong(self)
+#                 print(previous_value)
+#                 for i in BlackJack.insta:
+#                     if wybierz_gracza == i.nazwa_gracza:
+#                         print ('tak')
+#                         #self.karty_gracza.append(previous_value[-1])
+#                         vars(i)["karty_gracza"].append(previous_value[-1])
+#                     else:
+#                         print('nie')
+
+user.losuj_karte()
+user.licz_wynik()
+
+# Post_Nowa('krupier', 23, []).druk()
+user.druk()
 user.licz_wynik()
 user.wygrany()
