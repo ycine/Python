@@ -1,14 +1,20 @@
 import random
 import weakref
 from pprint import pprint
-from operator import attrgetter
+
+licz_kar = []
+listauzytkownikow = []
 previous_value = []
-
-
+dousuniecia = []
 print('Witaj w grze Black Jack ! Postepuj wedlug podpowiedzi i baw sie dobrze, oby los ci sprzyjal !!')
-gra = int(input('Podaj ilosc graczy(liczba): '))
 
-# for i in range(gra):
+while True:
+    try:
+        gra = int(input('Podaj ilosc graczy(liczba): '))
+        break
+    except ValueError:
+        print('musisz podac liczbe')
+
 
 class BlackJack():
     global karty
@@ -41,80 +47,116 @@ class BlackJack():
 
     @classmethod
     def from_input(cls):
+        while True:
+            grac = str(input('nazwa_gracza: '))
+            if grac not in listauzytkownikow:
+                listauzytkownikow.append(grac)
+                print(listauzytkownikow)
+                graj = grac
+                break
+            else:
+                print('uzytkownik z ta nazwa juz istnieje')
+
+
+        while True:
+            try:
+                gra = int(input('kwota: '))
+                break
+            except ValueError:
+                print('musisz podac liczbe')
         return cls(
-            str(input('nazwa_gracza: ')),
-            int(input('kwota: ')),
+            graj,
+            gra,
             'karty_gracza')
 
-    # global wrong
+    # def __delitem__(self, key):
+    #     print('obiekt usuniety')
+
     def wrong(self):
         dic_list = list(karty)
         loso = random.choice(dic_list)
         if loso not in previous_value:
             previous_value.append(loso)
 
-
     # TUTAJ TRZEBA DOPISAC LOGIKE, ZEBY DLA KOLEJNEGO GRACZA DAWAL KOLEJNE KARTY
-    #ta funkcja tutaj powinna
+
     def losuj_karte(self):
-        print (previous_value)
+        # print(previous_value)# tego tez nie potrzeba chyba
         for i in users.values():
             BlackJack.wrong(self)
             BlackJack.wrong(self)
             i.karty_gracza.extend(previous_value[-2:])
-            # print (previous_value)
 
     #FUNKCJA MA LICZYC WYNIK Z KART. I POKAZYWAC ZWYCIEZCE.. ?
     def licz_wynik(self):
-        licz_kar = []
+        print()
         for i in users.values():
             kar = i.karty_gracza
-            print (kar)
+            print(str(i.nazwa_gracza) + ' twoje wylosowane karty: ' + str(kar))
 
             kazdakartawartosc = []
             for kazdakartagracza in kar:
-                if kazdakartagracza == 'As_kier' or kazdakartagracza == 'As_karo' or kazdakartagracza == 'As_trefl' or kazdakartagracza == 'As_pik':
-                    asy = int(input('Masz Asa! o jaka wartosc chcesz podniesc wynik? 1/10 ?'))
-                    if asy == 1:
-                        kazdakartawartosc.append(int(1))
-                    else:
-                        kazdakartawartosc.append(int(10))
+                if kazdakartagracza not in licz_kar:
 
-                # print
+                    if kazdakartagracza == 'As_kier' or kazdakartagracza == 'As_karo' or kazdakartagracza == 'As_trefl' or kazdakartagracza == 'As_pik':
+                        licz_kar.append(kazdakartagracza)
+                        print()
+                        asy = int(input('Masz Asa! o jaka wartosc chcesz podniesc wynik? 1/10 ?'))
+                        if asy == 1:
+                            kazdakartawartosc.append(int(1))
+                        else:
+                            kazdakartawartosc.append(int(10))
+                    else:
+                        kazdakartawartosc.append(karty[kazdakartagracza])
+                    # print (kazdakartawartosc)
+                    i.suma.append(sum(kazdakartawartosc))
+
+                    # print('to ta wartosc.' + str(sum(i.suma[-1:])))
+                    if sum(i.suma[-1:]) > 21:
+                        # del user
+
+                        print('niestety przegrales, twoj wynik przekroczyl 21')
+                    else:
+                        pass
+                    # print(sum(kazdakartawartosc))
+
                 else:
-                    kazdakartawartosc.append(karty[kazdakartagracza])
-                print (kazdakartawartosc)
-                i.suma.append(sum(kazdakartawartosc))
-            print (sum(kazdakartawartosc))
+                    # print(sum(kazdakartawartosc))
+                    pass
+
+        for dkey, dvalue in users.items():
+            if sum(dvalue.suma[-1:]) > 21:
+                dousuniecia.append(dkey)
+        for l in dousuniecia:
+            if l in list(users.keys()):
+                del users[l]
 
     def wygrany(self):
+        print()
         for i in users.values():
             su = i.suma
             suli = []
             su2 = max(su)
             suli.append(su2)
-            for l in suli:
-                print (l)
-            print (str('oto maks: ') + str(max(suli)))
+            print(str(i.nazwa_gracza) + str(' twoj wynik: ' + str(max(su))))
 
-            print (str(i.nazwa_gracza) + str(' twoj wynik: ' + str(max(su))))
-            
-
-        # print (max(users.values(), key=attrgetter('suma')))
     def druk(self):
         for l in range(gra):
+            print()
             wybierz_gracza = (input('Wybierz gracza ktoremu dac karte: '))
             drugie_rozdanie = input('kolejna karta ? tak/nie')
             if drugie_rozdanie == 'tak':
                 BlackJack.wrong(self)
-                print(previous_value)
+
                 for i in BlackJack.insta:
                     if wybierz_gracza == i.nazwa_gracza:
-                        print ('tak')
+                        # print ('tak')
                         #self.karty_gracza.append(previous_value[-1])
                         vars(i)["karty_gracza"].append(previous_value[-1])
+                        print(previous_value[-1:])
                     else:
-                        print('nie')
+                        # print('nie')
+                        pass
 
 global users
 users = {}
@@ -122,33 +164,36 @@ for _ in range(gra):
     user = BlackJack.from_input()  # from user input
     users[user.nazwa_gracza] = user
 
+# for i in users.values():
+#     pprint(vars(i))
 
-# user.losuj_karte()
-# user.licz_wynik()
-#print do testow
-for i in users.values():
-    pprint(vars(i))
-#CZY TU MUSI BYC KLASA ?
-# class Post_Nowa(BlackJack):
-#     def druk(self):
-#         for l in range(gra):
-#             wybierz_gracza = (input('Wybierz gracza ktoremu dac karte: '))
-#             drugie_rozdanie = input('kolejna karta ? tak/nie')
-#             if drugie_rozdanie == 'tak':
-#                 BlackJack.wrong(self)
-#                 print(previous_value)
-#                 for i in BlackJack.insta:
-#                     if wybierz_gracza == i.nazwa_gracza:
-#                         print ('tak')
-#                         #self.karty_gracza.append(previous_value[-1])
-#                         vars(i)["karty_gracza"].append(previous_value[-1])
-#                     else:
-#                         print('nie')
 
 user.losuj_karte()
 user.licz_wynik()
-
-# Post_Nowa('krupier', 23, []).druk()
 user.druk()
 user.licz_wynik()
 user.wygrany()
+
+# obj = print(max(users.values(), key=attrgetter('suma')))
+# for i, v in users.items():
+#     print(i, v)
+
+valmax = []
+for i in users.values():
+    l = (max(i.suma))
+    valmax.append(l)
+maaks = []
+m = max(valmax)
+for i in valmax:
+    if i == m:
+        maaks.append(i)
+print()
+print('Oto lista zwyciezcow:')
+for i in users.values():
+    if max(i.suma) == maaks[0]:
+        print('Zwyciezca rundy: ' + str(i.nazwa_gracza) + ' z wynikiem: ' + str(max(i.suma)))
+    else:
+        i = None
+
+#kolejne losowanie
+
